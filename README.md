@@ -7,3 +7,4 @@
 - [ ] Medianos skaičiavimas.
 - [ ] Pseudo-atsitiktinių skaičių generavimas.
 - [x] 2 skaitmenys po kablelio.
+- [ ] Ivesties validacija.
