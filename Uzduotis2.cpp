@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <iomanip>  
 
 int main()
 {
@@ -7,7 +8,8 @@ int main()
 	std::string pavarde;
 	int n = 0;
 	int e = 0;
-	double galBalas = 0;
+	double galBalas = 0.00;
+	int* A = new int[n];
 	
 	std::cout << "Mokinio vardas: ";
 	std::cin >> vardas;
@@ -16,7 +18,6 @@ int main()
 	std::cout << "Mokinio pazymiu skaicius: ";
 	std::cin >> n;
 	
-	int A[n];
 	for (int i = 0; i < n; i++)
 	{
 		std::cout << i+1 << "-asis pazymys ";
@@ -37,7 +38,8 @@ int main()
 	}
 	
 	std::cout << "Mokinio egzamino ivertinimas: " << e << std::endl;
-	std::cout << "Mokinio Galutinis ivertinimas: " << galBalas << std::endl;
+	std::cout << std::fixed;
+	std::cout << "Mokinio Galutinis ivertinimas: " << std::setprecision(2) << galBalas << std::endl;
 	
 	return 0;
 }
