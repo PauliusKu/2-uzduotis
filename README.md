@@ -6,3 +6,4 @@
 - [ ] Nenustatyto pažymių skaičiaus įvedimas.
 - [ ] Medianos skaičiavimas.
 - [ ] Pseudo-atsitiktinių skaičių generavimas.
+- [ ] 2 skaitmenys po kablelio.
