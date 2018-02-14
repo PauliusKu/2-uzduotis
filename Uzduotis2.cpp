@@ -16,14 +16,24 @@ int main()
 	std::cout << "Mokinio pavarde: ";
 	std::cin >> pavarde;
 	
-	std::cout << "Norëdami pabaigti iveskite 0" << std::endl;
+	std::cout << "Norëdami pabaigti pazymiu ivedima, iveskite 0" << std::endl;
+	bool t = true;
 	do{
 		std::cout << n+1 << "-asis pazymys ";
 		std::cin >> A[n];
-		std::cout << A[n] << std::endl;
-		n++;
-		galBalas += A[n];
-	}while (A[n-1] != 0);
+		if (A[n] > 10 || A[n] < 0)
+		{
+			std::cout << "Vertinimas turi buti desimtbaleje sistemoje " << std::endl;
+		} else if (A[n] == 0)
+			{
+				t = false;
+				std::cout << "Pazymiu ivedimas baigtas" << std::endl;
+			} else {
+				galBalas += A[n];
+				n++;
+				std::cout << galBalas << std::endl;
+				}
+	}while (t);
 	
 	std::cout << "Mokinio egzamino ivertinimas: ";
 	std::cin >> e;
