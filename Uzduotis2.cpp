@@ -2,6 +2,7 @@
 #include <iomanip>  
 #include <vector>
 #include <algorithm>
+#include <random>
 
 int main()
 {
@@ -20,8 +21,9 @@ int main()
 	std::cin >> pavarde;
 	
 	std::cout << "Norëdami pabaigti pazymiu ivedima, iveskite 0" << std::endl;
-	bool t = true;
 	int a = 0;
+	/*
+	bool t = true;
 	do{
 		std::cout << n+1 << "-asis pazymys ";
 		std::cin >> a;
@@ -41,6 +43,15 @@ int main()
 				std::cout << galBalas << std::endl;
 				}
 	}while (t);
+	*/
+	std::random_device rd;
+	std::mt19937 mt(rd());
+	std::uniform_int_distribution<int> dist(1,10);
+	std::cin >> n;
+	for (int i = 0; i < n; i++)
+	{
+		A.push_back(dist(mt));
+	}
 	
 	std::cout << "Mokinio egzamino ivertinimas: ";
 	std::cin >> e;
