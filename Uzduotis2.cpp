@@ -4,88 +4,94 @@
 #include <algorithm>
 #include <random>
 
+using std::cout;
+using std::cin;
+using std::string;
+using std::vector;
+using std::endl;
+
 int main()
 {
 	//kintamuju deklaracijos
-	std::string vardas;
-	std::string pavarde;
+	string vardas;
+	string pavarde;
 	int n = 0;
 	int e = 0;
 	double med{};
 	double galBalas = 0.00;
-	std::vector<int> A;
+	vector<int> A;
 	
 	//ivesties pradzia
-	std::cout << "Mokinio vardas: ";
-	std::cin >> vardas;
-	std::cout << "Mokinio pavarde: ";
-	std::cin >> pavarde;
-	std::cout << "Pasirinkite ivesties tipa: 0 - random generavimas, 1 - ivestis per konsole, 2 - ivestis is failo" << std::endl;
+	cout << "Mokinio vardas: ";
+	cin >> vardas;
+	cout << "Mokinio pavarde: ";
+	cin >> pavarde;
+	cout << "Pasirinkite ivesties tipa: 0 - random generavimas, 1 - ivestis per konsole, 2 - ivestis is failo" << endl;
 	int ivestis = -1;
 	do
 	{
 		std::cin >> ivestis;
 		if (ivestis == 0)
 		{
-			std::cout << "Pasirinkote: random generavimas. Iveskite, kiek pazymiu norite sugeneruoti" << std::endl;
+			cout << "Pasirinkote: random generavimas. Iveskite, kiek pazymiu norite sugeneruoti" << endl;
 			std::random_device rd;
 			std::mt19937 mt(rd());
 			std::uniform_int_distribution<int> dist(1,10);
-			std::cin >> n;
+			cin >> n;
 			for (int i = 0; i < n; i++)
 			{
 				A.push_back(dist(mt));
 			}
-			std::cout << "Iveskite mokinio egzamino ivertinima: ";
-			std::cin >> e;
+			cout << "Iveskite mokinio egzamino ivertinima: ";
+			cin >> e;
 		}else if (ivestis == 1)
 		{
-			std::cout << "Pasirinkote: ivestis per konsole. Norëdami pabaigti pazymiu ivedima, iveskite 0" << std::endl;
+			cout << "Pasirinkote: ivestis per konsole. Norëdami pabaigti pazymiu ivedima, iveskite 0" << endl;
 			int a = 0;
 
 			bool t = true;
 			do{
-				std::cout << n+1 << "-asis pazymys ";
-				std::cin >> a;
+				cout << n+1 << "-asis pazymys ";
+				cin >> a;
 				A.push_back(a);
 				if (A[n] > 10 || A[n] < 0)
 				{
-					std::cout << "Vertinimas turi buti desimtbaleje sistemoje " << std::endl;
+					cout << "Vertinimas turi buti desimtbaleje sistemoje " << endl;
 					A.pop_back();
 				} else if (A[n] == 0)
 				{
 					t = false;
 					A.pop_back();
-					std::cout << "Pazymiu ivedimas baigtas" << std::endl;
+					cout << "Pazymiu ivedimas baigtas" << endl;
 				} else {
 					galBalas += A[n];
 					n++;
-					std::cout << galBalas << std::endl;
+					cout << galBalas << endl;
 				}
 			}while (t);
-			std::cout << "Mokinio egzamino ivertinimas: ";
-			std::cin >> e;
+			cout << "Mokinio egzamino ivertinimas: ";
+			cin >> e;
 		}else if (ivestis == 2)
 		{
-			std::cout << "Pasirinkote: ivestis is failo" << std::endl;
+			cout << "Pasirinkote: ivestis is failo" << endl;
 		} else {
-			std::cout << "ivedete klaidingai" << std::endl;
+			cout << "ivedete klaidingai" << endl;
 			ivestis = -1;
 		}
 	} while (ivestis == -1);
 	
-	std::cout << "Pasirinkite, kaip bus apskaiciuojamas namu darbo balas. 0 - vidurkis, 1 - mediana" << std::endl;
+	cout << "Pasirinkite, kaip bus apskaiciuojamas namu darbo balas. 0 - vidurkis, 1 - mediana" << endl;
 	ivestis = -1;
 	do{
-		std::cin >> ivestis;
+		cin >> ivestis;
 		if (ivestis == 0)
 		{
-			std::cout << "Pasirinkta: vidurkis" << std::endl;
+			cout << "Pasirinkta: vidurkis" << endl;
 			//galutinio balo skaiciavimas
 			galBalas = (galBalas/n*0.4)+0.6*e;
 		} else if (ivestis == 1)
 		{
-			std::cout << "Pasirinkta: meidiana" << std::endl;
+			cout << "Pasirinkta: meidiana" << endl;
 			//medianos skaiciavimas
 			std::sort (A.begin(), A.end());
 			if (n%2 == 0)
@@ -97,23 +103,22 @@ int main()
 			galBalas = med*0.4+0.6*e;
 			
 		} else{
-			std::cout << "ivedete klaidingai" << std::endl;
+			cout << "ivedete klaidingai" << endl;
 			ivestis = -1;
 		}
 	}while (ivestis == -1);
 	
 	//isvesties pradzia
-	std::cout << "Mokinio duomenys:" << std::endl;
-	std::cout << "Mokinio vardas: " << vardas << std::endl;
-	std::cout << "Mokinio pavarde: " << pavarde << std::endl;
+	cout << "Mokinio duomenys:" << endl;
+	cout << "Mokinio vardas: " << vardas << endl;
+	cout << "Mokinio pavarde: " << pavarde << endl;
 	for (int i = 0; i < n; i++)
 	{
-		std::cout << i+1 << "-asis pazymys " << A[i] << std::endl;
+		cout << i+1 << "-asis pazymys " << A[i] << endl;
 	}
-	
-	std::cout << "Mokinio egzamino ivertinimas: " << e << std::endl;
-	std::cout << std::fixed;
-	std::cout << "Mokinio Galutinis ivertinimas: " << std::setprecision(2) << galBalas << std::endl;
-	std::cout << "Programos pabaiga." << std::endl;
+	cout << "Mokinio egzamino ivertinimas: " << e << endl;
+	cout << std::fixed;
+	cout << "Mokinio Galutinis ivertinimas: " << std::setprecision(2) << galBalas << endl;
+	cout << "Programos pabaiga." << endl;
 	return 0;
 }
