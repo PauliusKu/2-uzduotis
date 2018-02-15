@@ -1,6 +1,7 @@
 #include <iostream>
 #include <iomanip>  
 #include <vector>
+#include <algorithm>
 
 int main()
 {
@@ -8,6 +9,7 @@ int main()
 	std::string pavarde;
 	int n = 0;
 	int e = 0;
+	double med{};
 	double galBalas = 0.00;
 	//int* A = new int[n];
 	std::vector<int> A;
@@ -31,6 +33,7 @@ int main()
 		} else if (A[n] == 0)
 			{
 				t = false;
+				A.pop_back();
 				std::cout << "Pazymiu ivedimas baigtas" << std::endl;
 			} else {
 				galBalas += A[n];
@@ -42,7 +45,13 @@ int main()
 	std::cout << "Mokinio egzamino ivertinimas: ";
 	std::cin >> e;
 	
-	galBalas = (galBalas / n*0.4)+0.6*e;
+	std::sort (A.begin(), A.end());
+	if (n%2 == 0)
+	{
+		med = (double)(A[n/2-1] + A[n/2])/2;
+	} else med = A[n/2];
+	
+	galBalas = med*0.4+0.6*e;
 	
 	std::cout << "Mokinio vardas: " << vardas << std::endl;
 	std::cout << "Mokinio pavarde: " << pavarde << std::endl;
