@@ -4,7 +4,7 @@
 - [x] Duomenų išvedimas.
 - [x] Galutinio balo pagal pradinę formulę suskaičiavimas.
 - [x] Nenustatyto pažymių skaičiaus įvedimas.
-- [ ] Medianos skaičiavimas.
+- [x] Medianos skaičiavimas.
 - [ ] Pseudo-atsitiktinių skaičių generavimas.
 - [x] 2 skaitmenys po kablelio.
 - [x] Ivesties validacija.
