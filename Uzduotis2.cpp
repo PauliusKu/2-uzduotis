@@ -1,6 +1,6 @@
 #include <iostream>
-#include <string>
 #include <iomanip>  
+#include <vector>
 
 int main()
 {
@@ -9,7 +9,8 @@ int main()
 	int n = 0;
 	int e = 0;
 	double galBalas = 0.00;
-	int* A = new int[n];
+	//int* A = new int[n];
+	std::vector<int> A;
 	
 	std::cout << "Mokinio vardas: ";
 	std::cin >> vardas;
@@ -18,12 +19,15 @@ int main()
 	
 	std::cout << "Norëdami pabaigti pazymiu ivedima, iveskite 0" << std::endl;
 	bool t = true;
+	int a = 0;
 	do{
 		std::cout << n+1 << "-asis pazymys ";
-		std::cin >> A[n];
+		std::cin >> a;
+		A.push_back(a);
 		if (A[n] > 10 || A[n] < 0)
 		{
 			std::cout << "Vertinimas turi buti desimtbaleje sistemoje " << std::endl;
+			A.pop_back();
 		} else if (A[n] == 0)
 			{
 				t = false;
@@ -42,7 +46,7 @@ int main()
 	
 	std::cout << "Mokinio vardas: " << vardas << std::endl;
 	std::cout << "Mokinio pavarde: " << pavarde << std::endl;
-	for (int i = 0; i < n-1; i++)
+	for (int i = 0; i < n; i++)
 	{
 		std::cout << i+1 << "-asis pazymys " << A[i] << std::endl;
 	}
