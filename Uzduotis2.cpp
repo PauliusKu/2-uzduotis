@@ -13,8 +13,8 @@ using std::endl;
 int main()
 {
 	//kintamuju deklaracijos
-	string vardas;
-	string pavarde;
+	char vardas[255];
+	char pavarde[255];
 	int n = 0; //pazymiu skaicius
 	int e = 0; //egzamino ivertinimas
 	double med{}; //mediana
@@ -110,7 +110,7 @@ int main()
 	}while (ivestis == -1);
 	
 	//isvesties pradzia
-	cout << "Mokinio duomenys:" << endl;
+	cout << "Mokinio duomenys" << endl;
 	cout << "Mokinio vardas: " << vardas << endl;
 	cout << "Mokinio pavarde: " << pavarde << endl;
 	for (int i = 0; i < n; i++) //isveda visus pazymius
