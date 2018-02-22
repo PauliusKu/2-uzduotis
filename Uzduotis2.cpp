@@ -41,6 +41,7 @@ int main()
 			for (int i = 0; i < n; i++)
 			{
 				A.push_back(dist(mt)); //i vektoriu irasomi random pazymiai
+				galBalas += A[i];
 			}
 			cout << "Iveskite mokinio egzamino ivertinima: ";
 			cin >> e;
