@@ -15,11 +15,11 @@ int main()
 	//kintamuju deklaracijos
 	string vardas;
 	string pavarde;
-	int n = 0;
-	int e = 0;
-	double med{};
-	double galBalas = 0.00;
-	vector<int> A;
+	int n = 0; //pazymiu skaicius
+	int e = 0; //egzamino ivertinimas
+	double med{}; //mediana
+	double galBalas = 0.00; //galutinis ivertinimas
+	vector<int> A; //pazymiu vektorius
 	
 	//ivesties pradzia
 	cout << "Mokinio vardas: ";
@@ -28,10 +28,10 @@ int main()
 	cin >> pavarde;
 	cout << "Pasirinkite ivesties tipa: 0 - random generavimas, 1 - ivestis per konsole, 2 - ivestis is failo" << endl;
 	int ivestis = -1;
-	do
+	do //pagrindinis ciklas kuriame pasirenkamas ivesties tipas
 	{
 		std::cin >> ivestis;
-		if (ivestis == 0)
+		if (ivestis == 0) //random generavimas
 		{
 			cout << "Pasirinkote: random generavimas. Iveskite, kiek pazymiu norite sugeneruoti" << endl;
 			std::random_device rd;
@@ -40,7 +40,7 @@ int main()
 			cin >> n;
 			for (int i = 0; i < n; i++)
 			{
-				A.push_back(dist(mt));
+				A.push_back(dist(mt)); //i vektoriu irasomi random pazymiai
 			}
 			cout << "Iveskite mokinio egzamino ivertinima: ";
 			cin >> e;
@@ -50,15 +50,15 @@ int main()
 			int a = 0;
 
 			bool t = true;
-			do{
+			do{ //ivedimas is konsoles
 				cout << n+1 << "-asis pazymys ";
 				cin >> a;
 				A.push_back(a);
-				if (A[n] > 10 || A[n] < 0)
+				if (A[n] > 10 || A[n] < 0) //jei pazymys nera nuo 1 iki 10, jis pasalinamas is vektoriaus
 				{
 					cout << "Vertinimas turi buti desimtbaleje sistemoje " << endl;
 					A.pop_back();
-				} else if (A[n] == 0)
+				} else if (A[n] == 0) //jei 0, paskutinis vektoriaus elementas pasalinamas
 				{
 					t = false;
 					A.pop_back();
@@ -71,7 +71,7 @@ int main()
 			}while (t);
 			cout << "Mokinio egzamino ivertinimas: ";
 			cin >> e;
-		}else if (ivestis == 2)
+		}else if (ivestis == 2) //ivedimas is failo
 		{
 			cout << "Pasirinkote: ivestis is failo" << endl;
 		} else {
@@ -84,12 +84,12 @@ int main()
 	ivestis = -1;
 	do{
 		cin >> ivestis;
-		if (ivestis == 0)
+		if (ivestis == 0) //vidurkis
 		{
 			cout << "Pasirinkta: vidurkis" << endl;
 			//galutinio balo skaiciavimas
 			galBalas = (galBalas/n*0.4)+0.6*e;
-		} else if (ivestis == 1)
+		} else if (ivestis == 1) //mediana
 		{
 			cout << "Pasirinkta: meidiana" << endl;
 			//medianos skaiciavimas
@@ -112,7 +112,7 @@ int main()
 	cout << "Mokinio duomenys:" << endl;
 	cout << "Mokinio vardas: " << vardas << endl;
 	cout << "Mokinio pavarde: " << pavarde << endl;
-	for (int i = 0; i < n; i++)
+	for (int i = 0; i < n; i++) //isveda visus pazymius
 	{
 		cout << i+1 << "-asis pazymys " << A[i] << endl;
 	}
@@ -121,4 +121,6 @@ int main()
 	cout << "Mokinio Galutinis ivertinimas: " << std::setprecision(2) << galBalas << endl;
 	cout << "Programos pabaiga." << endl;
 	return 0;
+	//programos pabaiga
+
 }
