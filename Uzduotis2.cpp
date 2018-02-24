@@ -13,14 +13,17 @@ using std::endl;
 
 
 struct Sarasas{
-	char vardas[255];
-	char pavarde[255];
-	vector<int> A;
+	char vardas[255]{};
+	char pavarde[255]{};
+	vector<int> Ivert {};
+	double med{};
+	double vid{};
 };
 
 void Random();
 void Konsole();
 void Failas();
+double Vid(vector<int> &V, int = 0);
 
 int main()
 {
@@ -206,7 +209,8 @@ void Konsole()
 void Failas()
 {
 	double galBalas = 0.00;
-	Sarasas S;
+	vector<Sarasas> S {1};
+	Sarasas T;
 	char line[255];
 	char c {};
 	char cc {};
@@ -217,34 +221,38 @@ void Failas()
 	{
 		if (inf.eof())
 		{
-			I.pop_back();
-			break;
-		}
-		inf >> c;
-		if ((int)c > 47 && (int)c < 58)
-		{
-			if ((int)c == 48)
+			if (I[I.size()-1] > 10)
 			{
-				I[I.size()-1] += 9;
+				I[I.size()-1] = 10;
+			} else I.pop_back();
+			break;
+		} else {
+			inf >> c;
+			if ((int)c > 47 && (int)c < 58)
+			{
+				if ((int)c == 48)
+				{
+					I[I.size()-1] += 9;
+				} else
+				{
+					I.push_back((int)c-48);
+				}
+				//cout << I[I.size()-1] << endl;
 			} else
 			{
-				I.push_back((int)c-48);
+				if ((int)cc > 47 && (int)cc < 58)
+				{
+					I.push_back(0);
+				}
+				if ((int)c > 64 && (int)c < 91)
+				{
+					V.push_back('0');
+				}
+				V.push_back(c);
+				//cout << V[V.size()-1];
 			}
-			//cout << I[I.size()-1] << endl;
-		} else
-		{
-			if ((int)cc > 47 && (int)cc < 58)
-			{
-				I.push_back(0);
-			}
-			if ((int)c > 64 && (int)c < 91)
-			{
-				V.push_back('0');
-			}
-			V.push_back(c);
-			//cout << V[V.size()-1];
+			cc = c;
 		}
-		cc = c;
 	}
 	V.push_back('0');
 	I.push_back(0);
@@ -259,7 +267,7 @@ void Failas()
 		cout << I[i] << " ";
 	}
 	//isvedimas
-	int i = 1;
+	/*int i = 1;
 	while(true)
 	{
 		if (V[i] != '0')
@@ -302,7 +310,57 @@ void Failas()
 	vid -= I[j-1];
 	galBalas = (double)vid/n*0.4+0.6*I[j-1];
 	cout << std::fixed;
-	cout << "Mokinio Galutinis ivertinimas: " << std::setprecision(2) << galBalas << endl;
+	cout << "Mokinio Galutinis ivertinimas: " << std::setprecision(2) << galBalas << endl;*/
+	int j = 1;
+	int l = 0;
+	for(int i = 0; i < S.size(); i++) // tike kiek yra zmoniu
+	{	
+		if (V[j])
+		{
+			int j1 = 0;
+			while(V[j]!='0') //pavarde
+			{
+				S[i].pavarde[j1] = V[j];
+				j++; j1++;
+			}
+			int j2 = 0;
+			j++;
+			while(V[j]!='0') //vardas
+			{
+				S[i].vardas[j2] = V[j];
+				j++; j2++;
+			}
+			j++;
+			S.push_back(T);
+			while (I[l] != 0)
+			{
+				S[i].Ivert.push_back(I[l]);
+				l++;
+			}
+			l++;
+			S[i].vid = Vid(S[i].Ivert, -1);
+			cout << "vid " << (double)S[i].vid << endl;
+		} else S.pop_back();
+		
+	}
+	cout << endl;
+	for (int i = 0; i < S.size(); i++)
+	{
+		cout << S[i].pavarde << endl << S[i].vardas << endl;
+		for (int j = 0; j < S[i].Ivert.size(); j++)
+		{
+			cout << S[i].Ivert[j] << endl;
+		}
+	}
 	
-	
-}	
+}
+double Vid(vector<int> &V, int k)
+{
+	int sum = 0;
+	for (int i = 0; i < V.size(); i++)
+	{
+		cout << "sum " << sum << endl;
+		sum += V[i];
+	}
+	return (double)sum / V.size();
+}
