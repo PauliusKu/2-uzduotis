@@ -203,6 +203,7 @@ void Failas()
 	vector<string> Pavarde {};
 	vector<string> Vardas {};
 	vector<double> Vid {};
+	vector<double> Med {};
 	vector<int> Pazymiai {};
 	for (int i = 0; !inf.eof(); i++)
 	{
@@ -236,5 +237,27 @@ void Failas()
 			vid = 0;
 		}
 	}
+	
+	for (int i = 0; i < Pazymiai.size(); i+=Pazymiai.size()/Vardas.size())
+	{
+		std::sort (Pazymiai.begin()+i, Pazymiai.begin()+6+i);
+	}
+	for (int i = 0; i < Pazymiai.size(); i++)
+	{
+		cout << Pazymiai[i] << " ";
+	}
+	cout << endl;
+	
+	//mediana
+	for (int i = 0; i < Vardas.size(); i++)
+	{
+		cout << i << endl;
+		if ((Pazymiai.size()/Vardas.size()-1)%2 == 0)
+			{
+				Med.push_back((double(Pazymiai[(Pazymiai.size()/Vardas.size()-1)/2-1+i*(Pazymiai.size()/Vardas.size())] + Pazymiai[(Pazymiai.size()/Vardas.size()-1)/2+i*(Pazymiai.size()/Vardas.size())]) / 2*0.4)+0.6*Pazymiai[((i+1)*Pazymiai.size()/Vardas.size())-1]); 
+			} else Med.push_back((double(Pazymiai[(Pazymiai.size()/Vardas.size()-1)/2+i*(Pazymiai.size()/Vardas.size())]) *0.4)+0.6*Pazymiai[((i+1)*Pazymiai.size()/Vardas.size())-1]);
+		cout << "MEd " << Med[i] << endl;
+	}
 	inf.close();
+	//rikiavimas pagal pavardes
 }
