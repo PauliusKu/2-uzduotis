@@ -12,18 +12,9 @@ using std::vector;
 using std::endl;
 
 
-struct Sarasas{
-	char vardas[255]{};
-	char pavarde[255]{};
-	vector<int> Ivert {};
-	double med{};
-	double vid{};
-};
-
 void Random();
 void Konsole();
 void Failas();
-double Vid(vector<int> &V, int = 0);
 
 int main()
 {
@@ -205,162 +196,45 @@ void Konsole()
 	cout << "Mokinio Galutinis ivertinimas: " << std::setprecision(2) << galBalas << endl;
 	cout << "Programos pabaiga." << endl;	
 }
-//----------------------------------------------------------------------------------------	
+//----------------------------------------------------------------------------------------
 void Failas()
 {
-	double galBalas = 0.00;
-	vector<Sarasas> S {1};
-	Sarasas T;
-	char line[255];
-	char c {};
-	char cc {};
-	vector <char> V;
-	vector <int> I;
 	std::ifstream inf("Failas.txt");
-	while (true)
+	vector<string> Pavarde {};
+	vector<string> Vardas {};
+	vector<double> Vid {};
+	vector<int> Pazymiai {};
+	for (int i = 0; !inf.eof(); i++)
 	{
-		if (inf.eof())
+		string input;
+		inf >> input;
+		cout << input << endl;
+		if ((input == "1") || (input == "2") || (input == "3") || (input == "4") || (input == "5") || (input == "6") || (input == "7") || (input == "8") || (input == "9") || (input == "10"))
 		{
-			if (I[I.size()-1] > 10)
-			{
-				I[I.size()-1] = 10;
-			} else I.pop_back();
-			break;
+			i--;			
+			Pazymiai.push_back(std::stoi (input));
 		} else {
-			inf >> c;
-			if ((int)c > 47 && (int)c < 58)
-			{
-				if ((int)c == 48)
-				{
-					I[I.size()-1] += 9;
-				} else
-				{
-					I.push_back((int)c-48);
-				}
-				//cout << I[I.size()-1] << endl;
-			} else
-			{
-				if ((int)cc > 47 && (int)cc < 58)
-				{
-					I.push_back(0);
-				}
-				if ((int)c > 64 && (int)c < 91)
-				{
-					V.push_back('0');
-				}
-				V.push_back(c);
-				//cout << V[V.size()-1];
-			}
-			cc = c;
+			Pavarde.push_back(input);
+			inf >> input;
+			cout << input << endl;
+			Vardas.push_back(input);
 		}
-	}
-	V.push_back('0');
-	I.push_back(0);
-	inf.close();
-	for (int i = 0; i < V.size(); i++)
-	{
-		cout << V[i];
-	}
-	cout << endl;
-	for (int i = 0; i < I.size(); i++)
-	{
-		cout << I[i] << " ";
-	}
-	//isvedimas
-	/*int i = 1;
-	while(true)
-	{
-		if (V[i] != '0')
-		{
-			cout << V[i];
-		} else {
-			break;
-		}
-		i++;
-	}
-	i++;
-	cout << " ";
-	while(true)
-	{
-		if (V[i] != '0')
-		{
-			cout << V[i];
-		} else {
-			break;
-		}
-		i++;
-	}
-	i++;
-	cout << " ";
-	int j = 0;
-	int vid = 0;
-	int n = 0;
-	while(true)
-	{
-		if (I[j] != 0)
-		{
-			n++;
-			vid += I[j];
-		} else {
-			break;
-		}
-		j++;
-	}
-	n--;
-	vid -= I[j-1];
-	galBalas = (double)vid/n*0.4+0.6*I[j-1];
-	cout << std::fixed;
-	cout << "Mokinio Galutinis ivertinimas: " << std::setprecision(2) << galBalas << endl;*/
-	int j = 1;
-	int l = 0;
-	for(int i = 0; i < S.size(); i++) // tike kiek yra zmoniu
-	{	
-		if (V[j])
-		{
-			int j1 = 0;
-			while(V[j]!='0') //pavarde
-			{
-				S[i].pavarde[j1] = V[j];
-				j++; j1++;
-			}
-			int j2 = 0;
-			j++;
-			while(V[j]!='0') //vardas
-			{
-				S[i].vardas[j2] = V[j];
-				j++; j2++;
-			}
-			j++;
-			S.push_back(T);
-			while (I[l] != 0)
-			{
-				S[i].Ivert.push_back(I[l]);
-				l++;
-			}
-			l++;
-			S[i].vid = Vid(S[i].Ivert, -1);
-			cout << "vid " << (double)S[i].vid << endl;
-		} else S.pop_back();
 		
 	}
-	cout << endl;
-	for (int i = 0; i < S.size(); i++)
+	
+	//vidurkis
+	double vid = 0;
+	cout << Pazymiai.size()/Vardas.size() << endl;
+	for (int i = 0; i < Pazymiai.size(); i++)
 	{
-		cout << S[i].pavarde << endl << S[i].vardas << endl;
-		for (int j = 0; j < S[i].Ivert.size(); j++)
+		vid += Pazymiai[i];
+		if (i % (Pazymiai.size()/Vardas.size()) == 5)
 		{
-			cout << S[i].Ivert[j] << endl;
+			i++;
+			Vid.push_back((vid/(Pazymiai.size()/Vardas.size()-1)*0.4)+0.6*Pazymiai[i]);
+			cout << Vid[Vid.size()-1] << endl;
+			vid = 0;
 		}
 	}
-	
-}
-double Vid(vector<int> &V, int k)
-{
-	int sum = 0;
-	for (int i = 0; i < V.size(); i++)
-	{
-		cout << "sum " << sum << endl;
-		sum += V[i];
-	}
-	return (double)sum / V.size();
+	inf.close();
 }
