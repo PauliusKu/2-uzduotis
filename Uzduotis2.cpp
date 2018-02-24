@@ -209,7 +209,6 @@ void Failas()
 	{
 		string input;
 		inf >> input;
-		cout << input << endl;
 		if ((input == "1") || (input == "2") || (input == "3") || (input == "4") || (input == "5") || (input == "6") || (input == "7") || (input == "8") || (input == "9") || (input == "10"))
 		{
 			i--;			
@@ -217,23 +216,21 @@ void Failas()
 		} else {
 			Pavarde.push_back(input);
 			inf >> input;
-			cout << input << endl;
 			Vardas.push_back(input);
 		}
 		
 	}
+	inf.close();
 	
 	//vidurkis
 	double vid = 0;
-	cout << Pazymiai.size()/Vardas.size() << endl;
 	for (int i = 0; i < Pazymiai.size(); i++)
 	{
 		vid += Pazymiai[i];
-		if (i % (Pazymiai.size()/Vardas.size()) == 5)
+		if (i % (Pazymiai.size()/Vardas.size()) == Pazymiai.size()/Vardas.size()-2)
 		{
 			i++;
-			Vid.push_back((vid/(Pazymiai.size()/Vardas.size()-1)*0.4)+0.6*Pazymiai[i]);
-			cout << Vid[Vid.size()-1] << endl;
+			Vid.push_back(double(vid/(Pazymiai.size()/Vardas.size()-1)*0.4)+0.6*Pazymiai[i]);
 			vid = 0;
 		}
 	}
@@ -242,22 +239,47 @@ void Failas()
 	{
 		std::sort (Pazymiai.begin()+i, Pazymiai.begin()+6+i);
 	}
-	for (int i = 0; i < Pazymiai.size(); i++)
-	{
-		cout << Pazymiai[i] << " ";
-	}
-	cout << endl;
 	
-	//mediana
+	//mediana ir randa ilgiausia varda ir pavarde
+	int a = 0; int b = 0;
 	for (int i = 0; i < Vardas.size(); i++)
 	{
-		cout << i << endl;
 		if ((Pazymiai.size()/Vardas.size()-1)%2 == 0)
 			{
 				Med.push_back((double(Pazymiai[(Pazymiai.size()/Vardas.size()-1)/2-1+i*(Pazymiai.size()/Vardas.size())] + Pazymiai[(Pazymiai.size()/Vardas.size()-1)/2+i*(Pazymiai.size()/Vardas.size())]) / 2*0.4)+0.6*Pazymiai[((i+1)*Pazymiai.size()/Vardas.size())-1]); 
 			} else Med.push_back((double(Pazymiai[(Pazymiai.size()/Vardas.size()-1)/2+i*(Pazymiai.size()/Vardas.size())]) *0.4)+0.6*Pazymiai[((i+1)*Pazymiai.size()/Vardas.size())-1]);
-		cout << "MEd " << Med[i] << endl;
+		if (Pavarde[i].size() > a)
+		{
+			a = Pavarde[i].size();
+		}
+		if (Vardas[i].size() > b)
+		{
+			b = Vardas[i].size();
+		}
 	}
-	inf.close();
+	
 	//rikiavimas pagal pavardes
+	for (int i = 0; i < Pavarde.size(); i++)
+	{
+		int a = i;
+		for (int j = i; j < Pavarde.size(); j++)
+		{
+			if (Pavarde[j] > Pavarde[i])
+			{
+				i = j;
+			}
+		}
+		Pavarde[i] = Pavarde[a];
+		Vardas[i] = Vardas[a];
+		Vid[i] = Vid[a];
+		Med[i] = Med[a];
+	}
+	//isvedimas
+	for (int i = 0; i < Vardas.size(); i++)
+	{
+		cout << std::setw(a+1) << std::left << Pavarde[i];
+		cout << std::setw(b+1) << std::left << Vardas[i];
+		cout << std::fixed;
+		cout << std::setw(3) << std::left << std::setprecision(2) << Vid[i] << " " << Med[i] << endl;
+	}
 }
