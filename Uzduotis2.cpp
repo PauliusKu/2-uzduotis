@@ -1,3 +1,10 @@
+/*!
+ *  \brief     Mokinio pazymiu skaiciavimas
+ *  \details   Ivedami mokinio pazymiai ir egzamino ivertinimas (random generavimas, ivestis per konsole ir ivestis is failo) ir apskaiciuojamas galutinis ivertinimas (pazymiu vidurkis, mediana).
+ *  \author    Paulius
+ *  \version   1.0
+ *  \date      2018-02-26
+ */
 #include <iostream>
 #include <iomanip>  
 #include <vector>
@@ -11,7 +18,6 @@ using std::string;
 using std::vector;
 using std::endl;
 
-
 void Random();
 void Konsole();
 void Failas();
@@ -21,7 +27,7 @@ int main()
 	
 	cout << "Pasirinkite ivesties tipa: 0 - random generavimas, 1 - ivestis per konsole, 2 - ivestis is failo" << endl;
 	int ivestis = -1;
-	do //pagrindinis ciklas kuriame pasirenkamas ivesties tipas
+	do //pagrindinisas ciklas kuriame pasirenkamas ivesties tipas
 	{
 		cin >> ivestis;
 		if (ivestis == 0) //random generavimas
@@ -199,32 +205,32 @@ void Konsole()
 //----------------------------------------------------------------------------------------
 void Failas()
 {
-	std::ifstream inf("Failas.txt");
-	vector<string> Pavarde {};
-	vector<string> Vardas {};
-	vector<double> Vid {};
-	vector<double> Med {};
-	vector<int> Pazymiai {};
+	std::ifstream inf("Failas.txt"); //nuskaitymo pradzia
+	vector<string> Pavarde {}; //mokiniu pavardziu vektorius
+	vector<string> Vardas {}; //mokiniu vardu vektorius
+	vector<double> Vid {}; //galutinis balas (vidurkis)
+	vector<double> Med {}; //galutinis balas (pazymiai)
+	vector<int> Pazymiai {}; //mokiniu pazymiai
 	for (int i = 0; !inf.eof(); i++)
 	{
-		string input;
-		inf >> input;
+		string input; //ivesties string'as
+		inf >> input; //ivestis
 		if ((input == "1") || (input == "2") || (input == "3") || (input == "4") || (input == "5") || (input == "6") || (input == "7") || (input == "8") || (input == "9") || (input == "10"))
 		{
 			i--;			
-			Pazymiai.push_back(std::stoi (input));
+			Pazymiai.push_back(std::stoi (input)); //iraso i vektoriu pazymius
 		} else {
-			Pavarde.push_back(input);
+			Pavarde.push_back(input); //iveda i vektoriu pavardes
 			inf >> input;
-			Vardas.push_back(input);
+			Vardas.push_back(input); //iveda i vektoriu vardus
 		}
 		
 	}
-	inf.close();
+	inf.close(); //nuskaitymo pabaiga
 	
 	//vidurkis
 	double vid = 0;
-	for (int i = 0; i < Pazymiai.size(); i++)
+	for (int i = 0; i < Pazymiai.size(); i++) //apskaiciuoja kiekvieno mokinio vidurki ir galutini ivertinima
 	{
 		vid += Pazymiai[i];
 		if (i % (Pazymiai.size()/Vardas.size()) == Pazymiai.size()/Vardas.size()-2)
@@ -235,6 +241,7 @@ void Failas()
 		}
 	}
 	
+	//isrikiuoja mokiniiu pazymius
 	for (int i = 0; i < Pazymiai.size(); i+=Pazymiai.size()/Vardas.size())
 	{
 		std::sort (Pazymiai.begin()+i, Pazymiai.begin()+6+i);
@@ -244,42 +251,71 @@ void Failas()
 	int a = 0; int b = 0;
 	for (int i = 0; i < Vardas.size(); i++)
 	{
-		if ((Pazymiai.size()/Vardas.size()-1)%2 == 0)
+		if ((Pazymiai.size()/Vardas.size()-1)%2 == 0) //apskaiciuoja kiekvieno mokinio pazymiu mediana ir galutini ivertinima
 			{
 				Med.push_back((double(Pazymiai[(Pazymiai.size()/Vardas.size()-1)/2-1+i*(Pazymiai.size()/Vardas.size())] + Pazymiai[(Pazymiai.size()/Vardas.size()-1)/2+i*(Pazymiai.size()/Vardas.size())]) / 2*0.4)+0.6*Pazymiai[((i+1)*Pazymiai.size()/Vardas.size())-1]); 
 			} else Med.push_back((double(Pazymiai[(Pazymiai.size()/Vardas.size()-1)/2+i*(Pazymiai.size()/Vardas.size())]) *0.4)+0.6*Pazymiai[((i+1)*Pazymiai.size()/Vardas.size())-1]);
-		if (Pavarde[i].size() > a)
+		if (Pavarde[i].size() > a) //randa ilgiausia pavarde
 		{
 			a = Pavarde[i].size();
 		}
-		if (Vardas[i].size() > b)
+		if (Vardas[i].size() > b) //randa ilgiausia varda
 		{
 			b = Vardas[i].size();
 		}
 	}
 	
 	//rikiavimas pagal pavardes
+	int best{};
 	for (int i = 0; i < Pavarde.size(); i++)
 	{
-		int a = i;
+		string pavarde; //papildomi kintamieji sukeitimui
+		string vardas;
+		double vid;
+		double med;
+		best = i;
 		for (int j = i; j < Pavarde.size(); j++)
 		{
-			if (Pavarde[j] > Pavarde[i])
+			if (Pavarde[j] < Pavarde[best])
 			{
-				i = j;
+				best = j;
 			}
 		}
-		Pavarde[i] = Pavarde[a];
-		Vardas[i] = Vardas[a];
-		Vid[i] = Vid[a];
-		Med[i] = Med[a];
+		//sukeitimas
+		pavarde = Pavarde[i];
+		vardas = Vardas[i];
+		vid = Vid[i];
+		med = Med[i];
+		Pavarde[i] = Pavarde[best];
+		Vardas[i] = Vardas[best];
+		Vid[i] = Vid[best];
+		Med[i] = Med[best];
+		Pavarde[best] = pavarde;
+		Vardas[best] = vardas;
+		Vid[best] = vid;
+		Med[best] = med;
 	}
 	//isvedimas
+	cout << std::setw(a+1) << std::left << "Pavarde";
+	cout << std::setw(b+1) << std::left << "Vardas";
+	cout << std::fixed;
+	cout << std::setw(3) << std::left << "Vid   Med" << endl;
+	for (int i = 0; i < a+b+12; i++)
+	{
+		cout << "-";
+	}
+	cout << endl;
 	for (int i = 0; i < Vardas.size(); i++)
 	{
 		cout << std::setw(a+1) << std::left << Pavarde[i];
 		cout << std::setw(b+1) << std::left << Vardas[i];
 		cout << std::fixed;
-		cout << std::setw(3) << std::left << std::setprecision(2) << Vid[i] << " " << Med[i] << endl;
+		cout << std::setw(3) << std::left << std::setprecision(2) << Vid[i] << "  " << Med[i] << endl;
 	}
+	for (int i = 0; i < a+b+12; i++)
+	{
+		cout << "-";
+	}
+	cout << endl;
+	cout << "Programos Pabaiga" << endl;
 }
