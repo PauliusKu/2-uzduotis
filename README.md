@@ -8,3 +8,8 @@
 - [x] Pseudo-atsitiktinių skaičių generavimas.
 - [x] 2 skaitmenys po kablelio.
 - [x] Ivesties validacija.
+- [x] Keletos mokinių ivestis is failo be struktūrų.
+- [x] Keletos mokinių išvedimas į konsolę.
+- [x] Rikiavimas pagal pavardes.
+- [ ] Perdaryti naudojant struktūras.
+
