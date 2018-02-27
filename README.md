@@ -1,4 +1,4 @@
-# 2-uzduotis
+﻿# 2-uzduotis
 ## Darbai:
 - [x] Duomenų įvedimas.
 - [x] Duomenų išvedimas.
@@ -12,4 +12,6 @@
 - [x] Keletos mokinių išvedimas į konsolę.
 - [x] Rikiavimas pagal pavardes.
 - [ ] Perdaryti naudojant struktūras.
+- [ ] Panaudoti try ir catch.
+- [ ] Struktūras perkelti į header'ius.
 
