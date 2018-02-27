@@ -1,10 +1,3 @@
-/*!
- *  \brief     Mokinio pazymiu skaiciavimas
- *  \details   Ivedami mokinio pazymiai ir egzamino ivertinimas (random generavimas, ivestis per konsole ir ivestis is failo) ir apskaiciuojamas galutinis ivertinimas (pazymiu vidurkis, mediana).
- *  \author    Paulius
- *  \version   1.0
- *  \date      2018-02-26
- */
 #include <iostream>
 #include <iomanip>  
 #include <vector>
@@ -18,6 +11,7 @@ using std::string;
 using std::vector;
 using std::endl;
 
+<<<<<<< HEAD
 struct Mokiniai{
 	string pavarde{};
 	string vardas{};
@@ -25,6 +19,8 @@ struct Mokiniai{
 	double galBalVid{};
 	double galBalMed{};	
 };
+=======
+>>>>>>> parent of 2bc7660... Galutinis v0.2
 
 void Random();
 void Konsole();
@@ -35,7 +31,7 @@ int main()
 	
 	cout << "Pasirinkite ivesties tipa: 0 - random generavimas, 1 - ivestis per konsole, 2 - ivestis is failo" << endl;
 	int ivestis = -1;
-	do //pagrindinisas ciklas kuriame pasirenkamas ivesties tipas
+	do //pagrindinis ciklas kuriame pasirenkamas ivesties tipas
 	{
 		cin >> ivestis;
 		if (ivestis == 0) //random generavimas
@@ -213,14 +209,25 @@ void Konsole()
 //----------------------------------------------------------------------------------------
 void Failas()
 {
+<<<<<<< HEAD
 	vector<Mokiniai> Mok;
 	std::ifstream inf("Failas.txt"); //nuskaitymo pradzia
 	Mokiniai in;
 	for (int i = 0; !inf.eof(); i)
+=======
+	std::ifstream inf("Failas.txt");
+	vector<string> Pavarde {};
+	vector<string> Vardas {};
+	vector<double> Vid {};
+	vector<double> Med {};
+	vector<int> Pazymiai {};
+	for (int i = 0; !inf.eof(); i++)
+>>>>>>> parent of 2bc7660... Galutinis v0.2
 	{
-		string input; //ivesties string'as
-		inf >> input; //ivestis
+		string input;
+		inf >> input;
 		if ((input == "1") || (input == "2") || (input == "3") || (input == "4") || (input == "5") || (input == "6") || (input == "7") || (input == "8") || (input == "9") || (input == "10"))
+<<<<<<< HEAD
 		{	
 			in.Pazymiai.push_back(std::stoi (input)); //iraso i vektoriu pazymius
 		} else {
@@ -233,13 +240,30 @@ void Failas()
 			in.vardas = input; //iveda i vektoriu vardus
 			i++;
 			in.Pazymiai = {};
+=======
+		{
+			i--;			
+			Pazymiai.push_back(std::stoi (input));
+		} else {
+			Pavarde.push_back(input);
+			inf >> input;
+			Vardas.push_back(input);
+>>>>>>> parent of 2bc7660... Galutinis v0.2
 		}
 	}
+<<<<<<< HEAD
 	Mok.push_back(in);
 	inf.close(); //nuskaitymo pabaiga
 	
 	//vidurkis
 	for (int i = 0; i < Mok.size(); i++)
+=======
+	inf.close();
+	
+	//vidurkis
+	double vid = 0;
+	for (int i = 0; i < Pazymiai.size(); i++)
+>>>>>>> parent of 2bc7660... Galutinis v0.2
 	{
 		for (int j = 0; j < Mok[i].Pazymiai.size()-1; j++)
 		{
@@ -247,8 +271,13 @@ void Failas()
 		}
 		Mok[i].galBalVid = (Mok[i].galBalVid / (Mok[i].Pazymiai.size()-1))*0.4 + (Mok[i].Pazymiai[Mok[i].Pazymiai.size()-1]*0.6);
 	}
+<<<<<<< HEAD
 	//isrikiuoja pazymius
 	for (int i = 0; i < Mok.size(); i++)
+=======
+	
+	for (int i = 0; i < Pazymiai.size(); i+=Pazymiai.size()/Vardas.size())
+>>>>>>> parent of 2bc7660... Galutinis v0.2
 	{
 		std::sort (Mok[i].Pazymiai.begin(), Mok[i].Pazymiai.end()-1);
 	}
@@ -257,7 +286,15 @@ void Failas()
 	int a = 0; int b = 0;
 	for (int i = 0; i < Mok.size(); i++)
 	{
+<<<<<<< HEAD
 		if ((Mok[i].Pazymiai.size()-1) % 2 == 0)
+=======
+		if ((Pazymiai.size()/Vardas.size()-1)%2 == 0)
+			{
+				Med.push_back((double(Pazymiai[(Pazymiai.size()/Vardas.size()-1)/2-1+i*(Pazymiai.size()/Vardas.size())] + Pazymiai[(Pazymiai.size()/Vardas.size()-1)/2+i*(Pazymiai.size()/Vardas.size())]) / 2*0.4)+0.6*Pazymiai[((i+1)*Pazymiai.size()/Vardas.size())-1]); 
+			} else Med.push_back((double(Pazymiai[(Pazymiai.size()/Vardas.size()-1)/2+i*(Pazymiai.size()/Vardas.size())]) *0.4)+0.6*Pazymiai[((i+1)*Pazymiai.size()/Vardas.size())-1]);
+		if (Pavarde[i].size() > a)
+>>>>>>> parent of 2bc7660... Galutinis v0.2
 		{
 			Mok[i].galBalMed = (double)(Mok[i].Pazymiai[Mok[i].Pazymiai.size()/2-1] + Mok[i].Pazymiai[Mok[i].Pazymiai.size()/2])/2;
 		} else Mok[i].galBalMed = Mok[i].Pazymiai[(Mok[i].Pazymiai.size()-1)/2];
@@ -266,7 +303,11 @@ void Failas()
 		{
 			a = Mok[i].pavarde.size();
 		}
+<<<<<<< HEAD
 		if (Mok[i].vardas.size() > b) //randa ilgiausia varda
+=======
+		if (Vardas[i].size() > b)
+>>>>>>> parent of 2bc7660... Galutinis v0.2
 		{
 			b = Mok[i].vardas.size();
 		}
@@ -274,6 +315,7 @@ void Failas()
 	}
 	
 	//rikiavimas pagal pavardes
+<<<<<<< HEAD
 	in = {}; //dar karta naujojama papildoma struktura
 	for (int i = 0; i < Mok.size(); i++)
 	{
@@ -281,10 +323,19 @@ void Failas()
 		for (int j = i+1; j < Mok.size(); j++)
 		{
 			if (Mok[best].pavarde > Mok[j].pavarde)
+=======
+	for (int i = 0; i < Pavarde.size(); i++)
+	{
+		int a = i;
+		for (int j = i; j < Pavarde.size(); j++)
+		{
+			if (Pavarde[j] > Pavarde[i])
+>>>>>>> parent of 2bc7660... Galutinis v0.2
 			{
-				best = j;
+				i = j;
 			}
 		}
+<<<<<<< HEAD
 		in = Mok[i];
 		Mok[i] = Mok[best];
 		Mok[best] = in;
@@ -301,10 +352,20 @@ void Failas()
 	}
 	cout << endl;
 	for (int i = 0; i < Mok.size(); i++)
+=======
+		Pavarde[i] = Pavarde[a];
+		Vardas[i] = Vardas[a];
+		Vid[i] = Vid[a];
+		Med[i] = Med[a];
+	}
+	//isvedimas
+	for (int i = 0; i < Vardas.size(); i++)
+>>>>>>> parent of 2bc7660... Galutinis v0.2
 	{
 		cout << std::setw(a+1) << std::left << Mok[i].pavarde;
 		cout << std::setw(b+1) << std::left << Mok[i].vardas;
 		cout << std::fixed;
+<<<<<<< HEAD
 		cout << std::setw(3) << std::left << std::setprecision(2) << Mok[i].galBalVid << "  " << Mok[i].galBalMed << endl;
 	}
 	for (int i = 0; i < a+b+12; i++)
@@ -313,4 +374,8 @@ void Failas()
 	}
 	
 	cout << "Programos Pabaiga" << endl;
+=======
+		cout << std::setw(3) << std::left << std::setprecision(2) << Vid[i] << " " << Med[i] << endl;
+	}
+>>>>>>> parent of 2bc7660... Galutinis v0.2
 }

@@ -1,9 +1,4 @@
 Pocius      Paulius    4   8   7   5   6   8   10 9
-Dakevicius  Augustinas 8   7   5   4   2   6   9  4
+Makevicius  Augustinas 8   7   5   4   2   6   9  4
 Kuprevicius Paulius    7   9   10  5   7   1   2  8
 Bijanskas   Simas      7   1   10  5   7   1   9  1
-Poci      Paulius    4   8   1   5   6   8   10 9
-Makeviciuss  Augustinas 8   2   5   4   2   6   9  4
-Kupreviciusscc Paulius    7   9   1  7   7   9   2  8
-Aijanskcas   Simascs      7   1   1  5   7   1   9  1
-Picicsus      Paulius    4   8   7   5   6   8   10 9
