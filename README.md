@@ -11,7 +11,7 @@
 - [x] Keletos mokinių ivestis is failo be struktūrų.
 - [x] Keletos mokinių išvedimas į konsolę.
 - [x] Rikiavimas pagal pavardes.
-- [ ] Perdaryti naudojant struktūras.
+- [x] Perdaryti naudojant struktūras.
 - [ ] Panaudoti try ir catch.
 - [ ] Struktūras perkelti į header'ius.
 
