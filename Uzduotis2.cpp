@@ -32,6 +32,7 @@ void Failas();
 void Nuskaitymas(vector<Mokiniai> *Mok);
 double Vidurkis(vector<int> *Pazymiai);
 double Mediana(vector<int> &Pazymiai);
+void Isvestis(vector<Mokiniai> &Mok);
 
 
 int main()
@@ -218,87 +219,52 @@ void Konsole()
 void Failas()
 {
 	vector<Mokiniai> Mok;
-	Nuskaitymas(&Mok);
-	//vidurkis
-	for (int i = 0; i < Mok.size(); i++)
-	{
-		Mok[i].galBalVid = Vidurkis(&Mok[i].Pazymiai);
-	}
-	//isrikiuoja pazymius
-	for (int i = 0; i < Mok.size(); i++)
-	{
-		std::sort (Mok[i].Pazymiai.begin(), Mok[i].Pazymiai.end()-1);
-	}
-	//mediana
-	int a = 0; int b = 0;
-	for (int i = 0; i < Mok.size(); i++)
-	{
-		if ((Mok[i].Pazymiai.size()-1) % 2 == 0)
+	try {
+    	Nuskaitymas(&Mok);
+    	//isrikiuoja pazymius
+		for (int i = 0; i < Mok.size(); i++)
 		{
-			Mok[i].galBalMed = (double)(Mok[i].Pazymiai[Mok[i].Pazymiai.size()/2-1] + Mok[i].Pazymiai[Mok[i].Pazymiai.size()/2])/2;
-		} else Mok[i].galBalMed = Mok[i].Pazymiai[(Mok[i].Pazymiai.size()-1)/2];
-		Mok[i].galBalMed = (Mok[i].galBalMed*0.4)+(Mok[i].Pazymiai[Mok[i].Pazymiai.size()-1]*0.6);
-		if (Mok[i].pavarde.size() > a) //randa ilgiausia pavarde
-		{
-			a = Mok[i].pavarde.size();
+			std::sort (Mok[i].Pazymiai.begin(), Mok[i].Pazymiai.end()-1);
 		}
-		if (Mok[i].vardas.size() > b) //randa ilgiausia varda
+		//vidurkis ir mediana
+		for (int i = 0; i < Mok.size(); i++)
 		{
-			b = Mok[i].vardas.size();
+			Mok[i].galBalVid = Vidurkis(&Mok[i].Pazymiai);
+			Mok[i].galBalMed = Mediana(Mok[i].Pazymiai);
 		}
+		int a = 0; int b = 0;
 		
-	}
-	//Mediana
-	/*for (int i = 0; i < Mok.size(); i++)
-	{
-		cout << &Mok[i].Pazymiai << endl;
-		Mok[i].galBalMed = Mediana(Mok[i].Pazymiai);
-	}*/
-	//rikiavimas pagal pavardes
-	Mokiniai in = {}; //dar karta naujojama papildoma struktura
-	for (int i = 0; i < Mok.size(); i++)
-	{
-		int best = i;
-		for (int j = i+1; j < Mok.size(); j++)
+		//rikiavimas pagal pavardes
+		Mokiniai in = {}; //dar karta naujojama papildoma struktura
+		for (int i = 0; i < Mok.size(); i++)
 		{
-			if (Mok[best].pavarde > Mok[j].pavarde)
+			int best = i;
+			for (int j = i+1; j < Mok.size(); j++)
 			{
-				best = j;
+				if (Mok[best].pavarde > Mok[j].pavarde)
+				{
+					best = j;
+				}
 			}
+			in = Mok[i];
+			Mok[i] = Mok[best];
+			Mok[best] = in;
 		}
-		in = Mok[i];
-		Mok[i] = Mok[best];
-		Mok[best] = in;
-	}
+		Isvestis(Mok);
+   } catch (const char* msg) {
+     cout << msg << endl;
+   }
 	
-	//i?vestis
-	cout << std::setw(a+1) << std::left << "Pavarde";
-	cout << std::setw(b+1) << std::left << "Vardas";
-	cout << std::fixed;
-	cout << std::setw(3) << std::left << "Vid   Med" << endl;
-	for (int i = 0; i < a+b+12; i++)
-	{
-		cout << "-";
-	}
-	cout << endl;
-	for (int i = 0; i < Mok.size(); i++)
-	{
-		cout << std::setw(a+1) << std::left << Mok[i].pavarde;
-		cout << std::setw(b+1) << std::left << Mok[i].vardas;
-		cout << std::fixed;
-		cout << std::setw(3) << std::left << std::setprecision(2) << Mok[i].galBalVid << "  " << Mok[i].galBalMed << endl;
-	}
-	for (int i = 0; i < a+b+12; i++)
-	{
-		cout << "-";
-	}
-	cout << endl;
 	cout << "Programos Pabaiga";
 }
 //----------------------------------------------------------------------------------------	
 void Nuskaitymas(vector<Mokiniai> *Mok)
 {
 	std::ifstream inf("Failas.txt"); //nuskaitymo pradzia
+	if (inf == NULL)
+	{
+		throw "Failas nerastas!";
+	}
 	Mokiniai in;
 	for (int i = 0; !inf.eof(); i)
 	{
@@ -330,12 +296,48 @@ double Vidurkis(vector<int> *Pazymiai)
 //----------------------------------------------------------------------------------------
 double Mediana(vector<int> &Pazymiai)
 {
-	if (Pazymiai.size() % 2 == 0)
+	if ((Pazymiai.size()-1) % 2 == 0)
 	{
-	//	return ((double(Pazymiai[(Pazymiai.size()-1)/2]) + double(Pazymiai[(Pazymiai.size()-1)/2+1]))/2)*0.4+Pazymiai[Pazymiai.size()-1]*0.6;
+		return ((double)(Pazymiai[(Pazymiai.size()-1)/2]) + (double)(Pazymiai[(Pazymiai.size()-1)/2+1]))/2*0.4+Pazymiai[Pazymiai.size()-1]*0.6;
 	} else {
-	//	return (double(Pazymiai[(Pazymiai.size()-1)/2])/2)*0.4+Pazymiai[Pazymiai.size()-1]*0.6;
+		return (Pazymiai[(Pazymiai.size()-1)/2])*0.4+Pazymiai[Pazymiai.size()-1]*0.6;
 	}
-	return 0;
 	
+}
+//----------------------------------------------------------------------------------------
+void Isvestis(vector<Mokiniai> &Mok)
+{
+	int a = 0; int b = 0;
+	for (int i = 0; i < Mok.size(); i++)
+	{
+		if (Mok[i].pavarde.size() > a) //randa ilgiausia pavarde
+		{
+			a = Mok[i].pavarde.size();
+		}
+		if (Mok[i].vardas.size() > b) //randa ilgiausia varda
+		{
+			b = Mok[i].vardas.size();
+		}	
+	}	
+	cout << std::setw(a+1) << std::left << "Pavarde";
+	cout << std::setw(b+1) << std::left << "Vardas";
+	cout << std::fixed;
+	cout << std::setw(3) << std::left << "Vid   Med" << endl;
+	for (int i = 0; i < a+b+12; i++)
+	{
+		cout << "-";
+	}
+	cout << endl;
+	for (int i = 0; i < Mok.size(); i++)
+	{
+		cout << std::setw(a+1) << std::left << Mok[i].pavarde;
+		cout << std::setw(b+1) << std::left << Mok[i].vardas;
+		cout << std::fixed;
+		cout << std::setw(3) << std::left << std::setprecision(2) << Mok[i].galBalVid << "  " << Mok[i].galBalMed << endl;
+	}
+	for (int i = 0; i < a+b+12; i++)
+	{
+		cout << "-";
+	}
+	cout << endl;	
 }
