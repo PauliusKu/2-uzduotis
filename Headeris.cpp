@@ -86,41 +86,64 @@ void Konsole()
 	Isvestis(MokiniaiV);
 }
 //----------------------------------------------------------------------------------------
+void Rusiuoti(Mokiniai Mok, vector<Mokiniai> &Win, vector<Mokiniai> &Los)
+{
+	if (Mok.galBalVid >= 6)
+	{
+		Win.push_back(Mok);
+	} else {
+		Los.push_back(Mok);
+	}
+}
+//----------------------------------------------------------------------------------------
+void Rikiuoti(vector<Mokiniai> &Mok)
+{
+	Mokiniai in = {};
+	for (int i = 0; i < Mok.size(); i++)
+	{
+		int best = i;
+		for (int j = i+1; j < Mok.size(); j++)
+		{
+			if (Mok[best].pavarde > Mok[j].pavarde)
+			{
+				best = j;
+			}
+		}
+		in = Mok[i];
+		Mok[i] = Mok[best];
+		Mok[best] = in;
+	}
+}
+//----------------------------------------------------------------------------------------
 void Failas()
 {
 	vector<Mokiniai> Mok;
+	vector<Mokiniai> Win{};
+	vector<Mokiniai> Los{};
 	try {
     	Nuskaitymas(&Mok);
     	
-		//vidurkis ir mediana
+		//vidurki, mediana ir rusiavimas
 		for (int i = 0; i < Mok.size(); i++)
 		{
 			std::sort (Mok[i].Pazymiai.begin(), Mok[i].Pazymiai.end()-1); //rikiavimas
 			Mok[i].galBalVid = Vidurkis(&Mok[i].Pazymiai);
 			Mok[i].galBalMed = Mediana(Mok[i].Pazymiai);
+			Rusiuoti(Mok[i], Win, Los);
 		}
 		int a = 0; int b = 0;
 		
-		//rikiavimas pagal pavardes
-		Mokiniai in = {}; //dar karta naujojama papildoma struktura
-		for (int i = 0; i < Mok.size(); i++)
-		{
-			int best = i;
-			for (int j = i+1; j < Mok.size(); j++)
-			{
-				if (Mok[best].pavarde > Mok[j].pavarde)
-				{
-					best = j;
-				}
-			}
-			in = Mok[i];
-			Mok[i] = Mok[best];
-			Mok[best] = in;
-		}
 		Isvestis(Mok);
-   } catch (const char* msg) {
-     cout << msg << endl;
-   }
+		cout << endl;
+		cout << "WINNERS" << endl;
+		Isvestis(Win);
+		cout << endl;
+		cout << "LOSERS" << endl;
+		Isvestis(Los);
+   	}catch (const char* msg) {
+    cout << msg << endl;
+   	}
+	
 	
 	cout << "Programos Pabaiga";
 }
@@ -174,6 +197,7 @@ double Mediana(vector<int> &Pazymiai)
 //----------------------------------------------------------------------------------------
 void Isvestis(vector<Mokiniai> &Mok)
 {
+	Rikiuoti(Mok);
 	int a = 8; int b = 8;
 	for (int i = 0; i < Mok.size(); i++)
 	{

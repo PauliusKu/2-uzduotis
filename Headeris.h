@@ -22,5 +22,7 @@ void Nuskaitymas(vector<Mokiniai> *Mok);
 double Vidurkis(vector<int> *Pazymiai);
 double Mediana(vector<int> &Pazymiai);
 void Isvestis(vector<Mokiniai> &Mok);
+void Rusiuoti(Mokiniai Mok, vector<Mokiniai> &Win, vector<Mokiniai> &Los);
+void Rikiuoti(vector<Mokiniai> &Mok);
 
 #endif
