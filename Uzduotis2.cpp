@@ -2,8 +2,8 @@
  *  \brief     Mokinio pazymiu skaiciavimas
  *  \details   Ivedami mokinio pazymiai ir egzamino ivertinimas (random generavimas, ivestis per konsole ir ivestis is failo) ir apskaiciuojamas galutinis ivertinimas (pazymiu vidurkis, mediana).
  *  \author    Paulius
- *  \version   1.0
- *  \date      2018-02-27
+ *  \version   0.3
+ *  \date      2018-03-01
  */
 #include <iostream>
 #include <iomanip>  

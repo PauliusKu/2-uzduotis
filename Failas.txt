@@ -1,5 +1,5 @@
-Pocius      Paulius    4   8   7   5 8 10
-Makevicius  Augustinas 8   7   5   6  4 10
-Kuprevicius Paulius    7   9   10  5  1 10
-Bijanskas   Simas      7   1   1  7    4 10
-Samu        Ale        5   10  10  10   7 10
+Pocius      Paulius    4   8   7   5    8 10 5
+Makevicius  Augustinas 8   7   5   6    4 10 7
+Kuprevicius Paulius    7   9   10  5    1 10 10
+Bijanskas   Simas      7   1   1   7    4 10 6
+Samu        Ale        5   10  10  10   7 10 9

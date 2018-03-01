@@ -12,20 +12,16 @@ using std::endl;
 
 void Random()
 {
-	char vardas[255];
-	char pavarde[255];
+	Mokiniai Mok;
 	
 	cout << "Mokinio vardas: ";
-	cin >> vardas;
+	cin >> Mok.vardas;
 	cout << "Mokinio pavarde: ";
-	cin >> pavarde;
+	cin >> Mok.pavarde;
 	
-	double galBalas = 0.00;
-	vector<int> A;
-	double med{};
-	int n = 0; //pazymiu skaicius
-	int e = 0; //egzamino ivertinimas
-	
+	int a = 0;
+	int n = 0;
+	bool t = true;
 	cout << "Pasirinkote: random generavimas. Iveskite, kiek pazymiu norite sugeneruoti" << endl;
 	std::random_device rd;
 	std::mt19937 mt(rd());
@@ -33,137 +29,61 @@ void Random()
 	cin >> n;
 	for (int i = 0; i < n; i++)
 	{
-		A.push_back(dist(mt)); //i vektoriu irasomi random pazymiai
-		galBalas += A[i];
+		Mok.Pazymiai.push_back(dist(mt)); //i vektoriu irasomi random pazymiai
 	}
-	cout << "Iveskite mokinio egzamino ivertinima: ";
-	cin >> e;
+	cout << "Mokinio egzamino ivertinimas: ";
+	cin >> a;
+	Mok.Pazymiai.push_back(a);
 	
-	cout << "Pasirinkite, kaip bus apskaiciuojamas namu darbo balas. 0 - vidurkis, 1 - mediana" << endl;
-	int ivestis = -1;
-	do{
-		cin >> ivestis;
-		if (ivestis == 0) //vidurkis
-		{
-			cout << "Pasirinkta: vidurkis" << endl;
-			//galutinio balo skaiciavimas
-			galBalas = (galBalas/n*0.4)+0.6*e;
-		} else if (ivestis == 1) //mediana
-		{
-			cout << "Pasirinkta: mediana" << endl;
-			//medianos skaiciavimas
-			std::sort (A.begin(), A.end());
-			if (n%2 == 0)
-			{
-				med = (double)(A[n/2-1] + A[n/2])/2;
-			} else med = A[n/2];
 	
-			//galutinio balo skaiciavimas
-			galBalas = med*0.4+0.6*e;
-			
-		} else{
-			cout << "ivedete klaidingai" << endl;
-			ivestis = -1;
-		}
-	}while (ivestis == -1);
+	Mok.galBalVid = Vidurkis(&Mok.Pazymiai);
+	std::sort (Mok.Pazymiai.begin(), Mok.Pazymiai.end()-1); //rikiavimas
+	Mok.galBalMed = Mediana(Mok.Pazymiai); //skaiciuojama mediana perduodama vidurkio kintamajam del isvesties patogumo
 	
-	//isvesties pradzia
-	cout << "Mokinio duomenys" << endl;
-	cout << "Mokinio vardas: " << vardas << endl;
-	cout << "Mokinio pavarde: " << pavarde << endl;
-	for (int i = 0; i < n; i++) //isveda visus pazymius
-	{
-		cout << i+1 << "-asis pazymys " << A[i] << endl;
-	}
-	cout << "Mokinio egzamino ivertinimas: " << e << endl;
-	cout << std::fixed;
-	cout << "Mokinio Galutinis ivertinimas: " << std::setprecision(2) << galBalas << endl;
-	cout << "Programos pabaiga." << endl;
+	vector<Mokiniai> MokiniaiV{Mok};
+	Isvestis(MokiniaiV);	
 	
 	
 }	
 //----------------------------------------------------------------------------------------	
 void Konsole()
 {
-	char vardas[255];
-	char pavarde[255];
+	Mokiniai Mok;
 	
 	cout << "Mokinio vardas: ";
-	cin >> vardas;
+	cin >> Mok.vardas;
 	cout << "Mokinio pavarde: ";
-	cin >> pavarde;
-	
-	double galBalas = 0.00;
-	vector<int> A;
-	double med{};
-	int n = 0; //pazymiu skaicius
-	int e = 0; //egzamino ivertinimas
+	cin >> Mok.pavarde;
 	
 	cout << "Pasirinkote: ivestis per konsole. Noredami pabaigti pazymiu ivedima, iveskite 0" << endl;
 	int a = 0;
-	
 	bool t = true;
 	do{ //ivedimas is konsoles
-		cout << n+1 << "-asis pazymys ";
+		cout << Mok.Pazymiai.size()+1 << "-asis pazymys ";
 		cin >> a;
-		A.push_back(a);
-		if (A[n] > 10 || A[n] < 0) //jei pazymys nera nuo 1 iki 10, jis pasalinamas is vektoriaus
+		Mok.Pazymiai.push_back(a);
+		if (Mok.Pazymiai[Mok.Pazymiai.size()-1] > 10 || Mok.Pazymiai[Mok.Pazymiai.size()-1] < 0) //jei pazymys nera nuo 1 iki 10, jis pasalinamas is vektoriaus
 		{
 			cout << "Vertinimas turi buti desimtbaleje sistemoje " << endl;
-			A.pop_back();
-		} else if (A[n] == 0) //jei 0, paskutinis vektoriaus elementas pasalinamas
+			Mok.Pazymiai.pop_back();
+		} else if (Mok.Pazymiai[Mok.Pazymiai.size()-1] == 0) //jei 0, paskutinis vektoriaus elementas pasalinamas
 		{
 			t = false;
-			A.pop_back();
+			Mok.Pazymiai.pop_back();
 			cout << "Pazymiu ivedimas baigtas" << endl;
 		} else {
-			galBalas += A[n];
-			n++;
 		}
 	}while (t);
 	cout << "Mokinio egzamino ivertinimas: ";
-	cin >> e;
+	cin >> a;
+	Mok.Pazymiai.push_back(a);
 	
-	cout << "Pasirinkite, kaip bus apskaiciuojamas namu darbo balas. 0 - vidurkis, 1 - mediana" << endl;
-	int ivestis = -1;
-	do{
-		cin >> ivestis;
-		if (ivestis == 0) //vidurkis
-		{
-			cout << "Pasirinkta: vidurkis" << endl;
-			//galutinio balo skaiciavimas
-			galBalas = (galBalas/n*0.4)+0.6*e;
-		} else if (ivestis == 1) //mediana
-		{
-			cout << "Pasirinkta: meidiana" << endl;
-			//medianos skaiciavimas
-			std::sort (A.begin(), A.end());
-			if (n%2 == 0)
-			{
-				med = (double)(A[n/2-1] + A[n/2])/2;
-			} else med = A[n/2];
+	Mok.galBalVid = Vidurkis(&Mok.Pazymiai);
+	std::sort (Mok.Pazymiai.begin(), Mok.Pazymiai.end()-1); //rikiavimas
+	Mok.galBalMed = Mediana(Mok.Pazymiai); //skaiciuojama mediana perduodama vidurkio kintamajam del isvesties patogumo
 	
-			//galutinio balo skaiciavimas
-			galBalas = med*0.4+0.6*e;
-			
-		} else{
-			cout << "ivedete klaidingai" << endl;
-			ivestis = -1;
-		}
-	}while (ivestis == -1);
-	
-	//isvesties pradzia
-	cout << "Mokinio duomenys" << endl;
-	cout << "Mokinio vardas: " << vardas << endl;
-	cout << "Mokinio pavarde: " << pavarde << endl;
-	for (int i = 0; i < n; i++) //isveda visus pazymius
-	{
-		cout << i+1 << "-asis pazymys " << A[i] << endl;
-	}
-	cout << "Mokinio egzamino ivertinimas: " << e << endl;
-	cout << std::fixed;
-	cout << "Mokinio Galutinis ivertinimas: " << std::setprecision(2) << galBalas << endl;
-	cout << "Programos pabaiga." << endl;	
+	vector<Mokiniai> MokiniaiV{Mok};
+	Isvestis(MokiniaiV);
 }
 //----------------------------------------------------------------------------------------
 void Failas()
@@ -171,14 +91,11 @@ void Failas()
 	vector<Mokiniai> Mok;
 	try {
     	Nuskaitymas(&Mok);
-    	//isrikiuoja pazymius
-		for (int i = 0; i < Mok.size(); i++)
-		{
-			std::sort (Mok[i].Pazymiai.begin(), Mok[i].Pazymiai.end()-1);
-		}
+    	
 		//vidurkis ir mediana
 		for (int i = 0; i < Mok.size(); i++)
 		{
+			std::sort (Mok[i].Pazymiai.begin(), Mok[i].Pazymiai.end()-1); //rikiavimas
 			Mok[i].galBalVid = Vidurkis(&Mok[i].Pazymiai);
 			Mok[i].galBalMed = Mediana(Mok[i].Pazymiai);
 		}
@@ -248,7 +165,7 @@ double Mediana(vector<int> &Pazymiai)
 {
 	if ((Pazymiai.size()-1) % 2 == 0)
 	{
-		return ((double)(Pazymiai[(Pazymiai.size()-1)/2]) + (double)(Pazymiai[(Pazymiai.size()-1)/2+1]))/2*0.4+Pazymiai[Pazymiai.size()-1]*0.6;
+		return ((double)(Pazymiai[(Pazymiai.size()-1)/2-1]) + (double)(Pazymiai[(Pazymiai.size()-1)/2]))/2*0.4+Pazymiai[Pazymiai.size()-1]*0.6;
 	} else {
 		return (Pazymiai[(Pazymiai.size()-1)/2])*0.4+Pazymiai[Pazymiai.size()-1]*0.6;
 	}
@@ -257,7 +174,7 @@ double Mediana(vector<int> &Pazymiai)
 //----------------------------------------------------------------------------------------
 void Isvestis(vector<Mokiniai> &Mok)
 {
-	int a = 0; int b = 0;
+	int a = 8; int b = 8;
 	for (int i = 0; i < Mok.size(); i++)
 	{
 		if (Mok[i].pavarde.size() > a) //randa ilgiausia pavarde
