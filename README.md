@@ -15,6 +15,6 @@
 - [x] Panaudoti try ir catch.
 - [x] Struktūras perkelti į header'ius.
 - [x] Losers and winners.
-- [ ] Failų generavimas.
-- [ ] Programos veikimo tikrinimas.
+- [x] Failų generavimas.
+- [x] Programos veikimo spartos tikrinimas.
 
