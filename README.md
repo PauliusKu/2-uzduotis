@@ -12,6 +12,9 @@
 - [x] Keletos mokinių išvedimas į konsolę.
 - [x] Rikiavimas pagal pavardes.
 - [x] Perdaryti naudojant struktūras.
-- [ ] Panaudoti try ir catch.
-- [ ] Struktūras perkelti į header'ius.
+- [x] Panaudoti try ir catch.
+- [x] Struktūras perkelti į header'ius.
+- [x] Losers and winners.
+- [ ] Failų generavimas.
+- [ ] Programos veikimo tikrinimas.
 
