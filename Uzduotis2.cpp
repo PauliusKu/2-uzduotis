@@ -20,21 +20,30 @@ using std::endl;
 
 int main()
 {
-	
-	cout << "Pasirinkite ivesties tipa: 0 - random generavimas, 1 - ivestis per konsole, 2 - ivestis is failo" << endl;
 	string ivestis {};
 	do //pagrindinisas ciklas kuriame pasirenkamas ivesties tipas
 	{
+		cout << "Funkcijos: 0 - random generavimas, 1 - ivestis per konsole, 2 - ivestis is failo, 3 - generuoti faila, 4 iseiti." << endl;
 		cin >> ivestis;
 		if (ivestis == "0") //random generavimas
 		{
 			Random();
+			ivestis = "";
 		}else if (ivestis == "1") //ivesdimas per konsole
 		{
 			Konsole();
+			ivestis = "";
 		}else if (ivestis == "2") //ivedimas is failo
 		{
 			Failas();
+			ivestis = "";
+		}else if (ivestis == "3") //
+		{
+			GeneruotiFaila();
+			ivestis = "";
+		}else if (ivestis == "4") //
+		{
+			cout << "Programos pabaiga." << endl;
 		} else {
 			cout << "ivedete klaidingai" << endl;
 			ivestis = "";

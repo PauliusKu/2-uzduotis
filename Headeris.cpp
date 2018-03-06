@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <fstream>
 #include <random>
+#include <chrono>
 
 using std::cout;
 using std::cin;
@@ -24,7 +25,7 @@ void Random()
 	bool t = true;
 	cout << "Pasirinkote: random generavimas. Iveskite, kiek pazymiu norite sugeneruoti" << endl;
 	std::random_device rd;
-	std::mt19937 mt(rd());
+	std::mt19937 mt(static_cast<unsigned int>(time(nullptr)));
 	std::uniform_int_distribution<int> dist(1,10);
 	cin >> n;
 	for (int i = 0; i < n; i++)
@@ -41,7 +42,9 @@ void Random()
 	Mok.galBalMed = Mediana(Mok.Pazymiai); //skaiciuojama mediana perduodama vidurkio kintamajam del isvesties patogumo
 	
 	vector<Mokiniai> MokiniaiV{Mok};
-	Isvestis(MokiniaiV);	
+	Isvestis(MokiniaiV);
+	cout << "Funkcijos pabaiga" << endl;
+	cout << "-----------------------------------------------------------------------------------------------------------" << endl;	
 	
 	
 }	
@@ -84,6 +87,8 @@ void Konsole()
 	
 	vector<Mokiniai> MokiniaiV{Mok};
 	Isvestis(MokiniaiV);
+	cout << "Funkcijos pabaiga" << endl;
+	cout << "-----------------------------------------------------------------------------------------------------------" << endl;
 }
 //----------------------------------------------------------------------------------------
 void Rusiuoti(Mokiniai Mok, vector<Mokiniai> &Win, vector<Mokiniai> &Los)
@@ -131,21 +136,20 @@ void Failas()
 			Mok[i].galBalMed = Mediana(Mok[i].Pazymiai);
 			Rusiuoti(Mok[i], Win, Los);
 		}
-		int a = 0; int b = 0;
-		
-		Isvestis(Mok);
+	/*	Isvestis(Mok);
 		cout << endl;
 		cout << "WINNERS" << endl;
 		Isvestis(Win);
 		cout << endl;
 		cout << "LOSERS" << endl;
-		Isvestis(Los);
+		Isvestis(Los);*/
    	}catch (const char* msg) {
     cout << msg << endl;
    	}
 	
 	
-	cout << "Programos Pabaiga";
+	cout << "Funkcijos pabaiga" << endl;
+	cout << "-----------------------------------------------------------------------------------------------------------" << endl;
 }
 //----------------------------------------------------------------------------------------	
 void Nuskaitymas(vector<Mokiniai> *Mok)
@@ -160,6 +164,14 @@ void Nuskaitymas(vector<Mokiniai> *Mok)
 	{
 		string input; //ivesties string'as
 		inf >> input; //ivestis
+		if (input == "")
+		{
+			if (i == 0)
+			{
+				throw "Failas tuscias!";
+			}
+			break;
+		}
 		if ((input == "1") || (input == "2") || (input == "3") || (input == "4") || (input == "5") || (input == "6") || (input == "7") || (input == "8") || (input == "9") || (input == "10"))
 		{	
 			in.Pazymiai.push_back(std::stoi (input)); //iraso i vektoriu pazymius
@@ -208,7 +220,7 @@ void Isvestis(vector<Mokiniai> &Mok)
 		if (Mok[i].vardas.size() > b) //randa ilgiausia varda
 		{
 			b = Mok[i].vardas.size();
-		}	
+		}
 	}	
 	cout << std::setw(a+1) << std::left << "Pavarde";
 	cout << std::setw(b+1) << std::left << "Vardas";
@@ -221,6 +233,7 @@ void Isvestis(vector<Mokiniai> &Mok)
 	cout << endl;
 	for (int i = 0; i < Mok.size(); i++)
 	{
+		cout << i+1 << " ";
 		cout << std::setw(a+1) << std::left << Mok[i].pavarde;
 		cout << std::setw(b+1) << std::left << Mok[i].vardas;
 		cout << std::fixed;
@@ -231,4 +244,43 @@ void Isvestis(vector<Mokiniai> &Mok)
 		cout << "-";
 	}
 	cout << endl;	
+}
+//----------------------------------------------------------------------------------------
+void GeneruotiFaila()
+{
+	std::ofstream of("Failas.txt"); //irasymo pradzia
+	unsigned int n{}; //ilgis
+	cout << "Iveskte, kokio ilgio?" << endl;
+	cin >> n;
+	
+	auto start = std::chrono::high_resolution_clock::now();
+	
+	std::random_device rd;
+	std::mt19937 mt(static_cast<unsigned int>(time(nullptr)));
+	for (unsigned int i = 0; i < n; i++)
+	{
+		std::uniform_int_distribution<char> dist(97,122);
+		of << (char)(dist(mt)-32);
+		for (int i = 0; i < (int)dist(mt)-95; i++)
+		{
+			of << dist(mt);
+		}
+		of << " ";
+		of << (char)(dist(mt)-32);
+		for (int i = 0; i < (int)dist(mt)-95; i++)
+			{
+			of << dist(mt);
+		}
+		of << " ";
+		std::uniform_int_distribution<int> distint(1, 10);
+		for (int i = 0; i < (int)dist(mt)-95; i++)
+		{
+			of << distint(mt) << " ";
+		}	
+		of << endl;
+	}
+	of.close();
+	Failas();
+	auto end = std::chrono::high_resolution_clock::now();
+	cout << std::chrono::duration<double>(end-start).count() << " sekundes" << endl;
 }
