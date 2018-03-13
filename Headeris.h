@@ -24,6 +24,6 @@ double Mediana(vector<int> &Pazymiai);
 void Isvestis(vector<Mokiniai> &Mok);
 void Rusiuoti(Mokiniai Mok, vector<Mokiniai> &Win, vector<Mokiniai> &Los);
 void Rikiuoti(vector<Mokiniai> &Mok);
-void GeneruotiFaila();
+void GeneruotiFaila(unsigned int n);
 
 #endif

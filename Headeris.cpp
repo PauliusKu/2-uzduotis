@@ -136,7 +136,7 @@ void Failas()
 			Mok[i].galBalMed = Mediana(Mok[i].Pazymiai);
 			Rusiuoti(Mok[i], Win, Los);
 		}
-	/*	Isvestis(Mok);
+	/*	Isvestis(Mok);             //visu duomenu isvestis per konsole
 		cout << endl;
 		cout << "WINNERS" << endl;
 		Isvestis(Win);
@@ -246,12 +246,9 @@ void Isvestis(vector<Mokiniai> &Mok)
 	cout << endl;	
 }
 //----------------------------------------------------------------------------------------
-void GeneruotiFaila()
+void GeneruotiFaila(unsigned int n)
 {
 	std::ofstream of("Failas.txt"); //irasymo pradzia
-	unsigned int n{}; //ilgis
-	cout << "Iveskte, kokio ilgio?" << endl;
-	cin >> n;
 	
 	auto start = std::chrono::high_resolution_clock::now();
 	
