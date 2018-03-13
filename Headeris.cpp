@@ -48,11 +48,10 @@ void Random()
 	
 	
 }	
-//----------------------------------------------------------------------------------------	
+//----------------------------------------------------------------------------------------
 void Konsole()
 {
 	Mokiniai Mok;
-	
 	cout << "Mokinio vardas: ";
 	cin >> Mok.vardas;
 	cout << "Mokinio pavarde: ";
@@ -71,9 +70,15 @@ void Konsole()
 			Mok.Pazymiai.pop_back();
 		} else if (Mok.Pazymiai[Mok.Pazymiai.size()-1] == 0) //jei 0, paskutinis vektoriaus elementas pasalinamas
 		{
-			t = false;
-			Mok.Pazymiai.pop_back();
-			cout << "Pazymiu ivedimas baigtas" << endl;
+			if (Mok.Pazymiai.size() == 1)
+			{
+				Mok.Pazymiai.pop_back();
+				cout << "Neivedete nei vieno pazymio" << endl;
+			} else {
+				t = false;
+				Mok.Pazymiai.pop_back();
+				cout << "Pazymiu ivedimas baigtas" << endl;
+			}
 		} else {
 		}
 	}while (t);
@@ -131,6 +136,11 @@ void Failas()
 		//vidurki, mediana ir rusiavimas
 		for (int i = 0; i < Mok.size(); i++)
 		{
+			switch(Mok[i].Pazymiai.size())
+			{
+				case 1: throw "Truksta nd ivertinimu!";
+				case 0: throw "Truksta nd ivertinimu ir egzamino ivertinimu!";
+			}
 			std::sort (Mok[i].Pazymiai.begin(), Mok[i].Pazymiai.end()-1); //rikiavimas
 			Mok[i].galBalVid = Vidurkis(&Mok[i].Pazymiai);
 			Mok[i].galBalMed = Mediana(Mok[i].Pazymiai);

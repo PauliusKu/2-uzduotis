@@ -11,6 +11,7 @@
 #include <algorithm>
 #include <fstream>
 #include "Headeris.h"
+//#include <string>
 
 using std::cout;
 using std::cin;
@@ -25,6 +26,7 @@ int main()
 	{
 		cout << "Funkcijos: 0 - random generavimas, 1 - ivestis per konsole, 2 - ivestis is failo, 3 - generuoti faila, 4 - testas, 5 iseiti." << endl;
 		cin >> ivestis;
+		cin.clear();
 		if (ivestis == "0") //random generavimas
 		{
 			Random();
