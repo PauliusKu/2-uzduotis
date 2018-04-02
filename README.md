@@ -33,6 +33,16 @@
 |List |0        s| 0.00603    s|0.0502584 s |0.604575 s|6.50328 s|
 ### Išvados:
 Čia pateikti I ir II strategijos su algoritmais spartos rodikliai. Jeigu algoritmų nenaudojame, antrtosios strategijos sparta žymiai sumažėja. Visais atvejais (I, II strategijos, su algoritmais, be algoritmų) greičiausiai veikia programa su List konteineriu.
+
+## Programos įdiegimas
+
+  1. Atsisiųskite [**naujausią versiją.**](https://github.com/PauliusKu/2-uzduotisVEC/releases)<br>
+  2. Išskleiskite failus į pasirinktą vietą
+  3. Per konsolė įveskite:
+  
+    cd OOP-Task-2/uzd2/cpp
+    g++ -std=c++11 *.cpp -o main
+    ./main
 ## Versijos:
 ### [Changelog v1.0 Galutinis](https://github.com/PauliusKu/2-uzduotisVEC/releases/tag/v1)
 #### Pridėta
