@@ -50,7 +50,7 @@ template <typename T> void Isvestis(T &Mok)
 			b = v.vardas.size();
 		}
 	}	
-	cout << std::setw(a+1) << std::left << "Pavarde";
+	cout << std::setw(a+3) << std::left << "Pavarde";
 	cout << std::setw(b+1) << std::left << "Vardas";
 	cout << std::fixed;
 	cout << std::setw(3) << std::left << "Vid   Med" << endl;

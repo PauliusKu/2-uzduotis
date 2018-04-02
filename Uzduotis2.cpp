@@ -24,25 +24,34 @@ int main()
 	unsigned int a = 10;
 	do //pagrindinisas ciklas kuriame pasirenkamas ivesties tipas
 	{
-		cout << "Funkcijos: 0 - random generavimas, 1 - ivestis per konsole, 2 - ivestis is failo, 3 - generuoti faila, 4 - testas, 5 - iseiti." << endl;
+		cout << "Funkcijos: 1 - random generavimas, 2 - ivestis per konsole, 3 - ivestis is failo, 4 - generuoti faila, 5 - testas, 0 - iseiti." << endl;
 		try{
 			a = ivestiSk(0, 5);
 		
 			switch(a)
 			{
-				case 0:	Random<std::list<Mokiniai>>(); a = 10; break;
-				case 1: Konsole(); a = 10; break;
-				case 2: Failas<std::vector<Mokiniai>>(); a = 10; break;
-				case 3: //failo generavimas
+				case 1:	Random<std::list<Mokiniai>>(); a = 10; break;
+				case 2: Konsole(); a = 10; break;
+				case 3: Failas<std::vector<Mokiniai>>(); a = 10; break;
+				case 4: //failo generavimas
 				{
 					unsigned int n{};
-					cout << "Iveskte, kokio ilgio?" << endl;
-					cin >> n;
+					bool t = true;
+					do{ 
+						cout << "Iveskite, kokio dydzio faila norite sugeneruoti (1-10^7) " << endl;
+						t = false;
+						try{
+							n = ivestiSk(1, 10000000);
+						}catch (const char* msg) {
+    						std::cout << msg << std::endl;
+    						t = true;
+   						}
+					}while (t);
 					GeneruotiFaila(n);
 					a = 10;
 					break;
 				}
-				case 4:
+				case 5:
 				{
 					unsigned int size{};
 					bool t = true;
@@ -51,7 +60,6 @@ int main()
 						t = false;
 						try{
 							size = ivestiSk(2, 7);
-							cout << a << endl;
 						}catch (const char* msg) {
     						std::cout << msg << std::endl;
     							t = true;
@@ -97,7 +105,7 @@ int main()
 					a = 10;
 					break;
 				}
-				case 5: cout << "Programos pabaiga." << endl; break;
+				case 0: cout << "Programos pabaiga." << endl; break;
 			}
 		}catch (const char* msg)
 		{
