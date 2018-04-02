@@ -1,4 +1,5 @@
-﻿# 2-uzduotis
+﻿# Paulius KUprevičius. 2 uzduotis
+ ![alt text](https://github.com/PauliusKu/2-uzduotisVEC/blob/master/Pav/WordItOut-word-cloud-2910278.png)
 ## Programos pagrindinės funkcijos:
   1. Sugeneruoti mokinio pažymius (max 10^6) ir atlikti galutinio balo skaičiavimą (ivestis per konsolę). Ivesesties struktūra:
   2. Įvesti mokinio duomenys ir atlikti galutinio balo skaičiavimą (ivestis per konsolę)    
