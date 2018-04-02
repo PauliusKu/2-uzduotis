@@ -1,9 +1,9 @@
 ﻿# Paulius KUprevičius. 2 uzduotis
  ![alt text](https://github.com/PauliusKu/2-uzduotisVEC/blob/master/Pav/WordItOut-word-cloud-2910278.png)
 ## Programos pagrindinės funkcijos:
-  1. Sugeneruoti mokinio pažymius (max 10^6) ir atlikti galutinio balo skaičiavimą (ivestis per konsolę). Ivesesties struktūra:
-  2. Įvesti mokinio duomenys ir atlikti galutinio balo skaičiavimą (ivestis per konsolę)    
-  3. Įvesti mokinių doumenys iš 'txt' failo ir išvesti mokinių galutinių balų lentelę per konsolę
+  1. Sugeneruoti mokinio pažymius (max 10^6) ir atlikti galutinio balo skaičiavimą (ivestis per konsolę).
+  2. Įvesti mokinio duomenys ir atlikti galutinio balo skaičiavimą (ivestis per konsolę)    .
+  3. Įvesti mokinių doumenys iš 'txt' failo ir išvesti mokinių galutinių balų lentelę per konsolę.
   4. Sugeneruoti norimo dydžio (1-10^7) mokinių 'txt' failą. Mokinio vardo ir pavardės ilgis bei pažymių kiekis: 3-21 simboliai.
   5. Naudojant 2 skirtingas strategijas testuoti vector deque ir list tipo konteinerius ir pateikti ataskaitą.
 ## Programos naudojimas
