@@ -13,3 +13,22 @@
     4: generuoti faila -> Iveskite, kokio dydzio faila norite sugeneruoti ->...
     5: testas -> Iveskite dydi x (10^x , Max 10^7) ->...
 ### Išvestis:
+![alt text](https://github.com/PauliusKu/2-uzduotisVEC/blob/master/Pav/Isvestis.png)
+## Veikimo spartos analizė
+### I strategija (su algoritmais)
+
+|Container                    |n = 100    |n = 1000     |n = 10000    |n = 100000   |n = 1000000 |
+|-----------------------------|----------|------------|------------|------------|-----------|
+|Vector |0.0009756 s|0.008041 s|0.0741989 s |0.990607  s|10.7395  s|
+|Deque |0.0010027 s| 0.0070441 s|0.072219 s |0.933481 s|11.1386 s|
+|List |0        s| 0.00603    s|0.0561509 s |0.73796 s|8.16674 s|
+
+### II strategija (su algoritmais)
+
+|Container                    |n = 100    |n = 1000     |n = 10000    |n = 100000   |n = 1000000 |
+|-----------------------------|----------|------------|------------|------------|-----------|
+|Vector |0.0009053 s|0.006041 s|0.0787989 s |0.89734857  s|10.0808  s|
+|Deque |0.0010524 s| 0.0070259 s|0.071581 s |0.8670571 s|9.67171 s|
+|List |0        s| 0.00603    s|0.0502584 s |0.604575 s|6.50328 s|
+### Išvados:
+Čia pateikti I ir II strategijos su algoritmais spartos rodikliai. Jeigu algoritmų nenaudojame, antrtosios strategijos sparta žymiai sumažėja. Visais atvejais (I, II strategijos, su algoritmais, be algoritmų) greičiausiai veikia programa su List konteineriu.
