@@ -33,3 +33,19 @@
 |List |0        s| 0.00603    s|0.0502584 s |0.604575 s|6.50328 s|
 ### Išvados:
 Čia pateikti I ir II strategijos su algoritmais spartos rodikliai. Jeigu algoritmų nenaudojame, antrtosios strategijos sparta žymiai sumažėja. Visais atvejais (I, II strategijos, su algoritmais, be algoritmų) greičiausiai veikia programa su List konteineriu.
+## Versijos:
+### [Changelog v1.0](https://github.com/PauliusKu/2-uzduotisVEC/releases/tag/v1)
+#### Pridėta
+- 2 skirtingų strategijų įgyvendinimas
+- Panaudojami algoritmai
+#### Koreguota 
+- Dalis funkcijų ir UI
+#### Panaikinta
+### [Changelog v0.5](https://github.com/PauliusKu/2-uzduotisVEC/releases/tag/v0.5)
+#### Pridėta
+- Testavimas (list ir deque)
+- Templates
+#### Koreguota 
+- Pakeista dalis funkcijų
+#### Panaikinta
+- Dalis nebereikalingų funkcijų
