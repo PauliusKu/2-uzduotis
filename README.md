@@ -34,14 +34,14 @@
 ### Išvados:
 Čia pateikti I ir II strategijos su algoritmais spartos rodikliai. Jeigu algoritmų nenaudojame, antrtosios strategijos sparta žymiai sumažėja. Visais atvejais (I, II strategijos, su algoritmais, be algoritmų) greičiausiai veikia programa su List konteineriu.
 ## Versijos:
-### [Changelog v1.0](https://github.com/PauliusKu/2-uzduotisVEC/releases/tag/v1)
+### [Changelog v1.0 Galutinis](https://github.com/PauliusKu/2-uzduotisVEC/releases/tag/v1)
 #### Pridėta
 - 2 skirtingų strategijų įgyvendinimas
 - Panaudojami algoritmai
 #### Koreguota 
 - Dalis funkcijų ir UI
 #### Panaikinta
-### [Changelog v0.5](https://github.com/PauliusKu/2-uzduotisVEC/releases/tag/v0.5)
+### [Changelog v0.5 Konteinerių testavimas](https://github.com/PauliusKu/2-uzduotisVEC/releases/tag/v0.5)
 #### Pridėta
 - Testavimas (list ir deque)
 - Templates
@@ -49,3 +49,44 @@
 - Pakeista dalis funkcijų
 #### Panaikinta
 - Dalis nebereikalingų funkcijų
+### [Changelog v0.4 Skirstymas ir greičio matavimas](https://github.com/PauliusKu/2-uzduotisVEC/releases/tag/v0.4)
+#### Pridėta
+- Testavimas (vektoriai)
+- Mokinių skirstymas į kategorijas
+#### Koreguota 
+- Pakeista dalis funkcijų
+#### Panaikinta
+
+#### Skaičiavimo trukmė:
+     10 - apie 0.004 s
+     100 - apie 0.008 s
+     1000 - apie 0.02 s
+     10000 - apie 0.1 s
+     100000 - apie 1 s
+     1000000 - apie 10 s
+
+### [Changelog v0.3 Struktūros](https://github.com/PauliusKu/2-uzduotisVEC/releases/tag/v0.3)
+#### Pridėta
+- Struktūros
+- Exception Handling
+- Header files
+#### Koreguota
+- Dalis veiksmų perkelta į atskiras funkcijas
+#### Panaikinta
+### [Changelog v0.2 Įvedimas iš failo](https://github.com/PauliusKu/2-uzduotisVEC/releases/tag/v0.2)
+#### Pridėta
+- įvedimas iš failo
+- išvedimas į konsolė (daug mokinių)
+- rikiavimas pagal pavardes
+#### Koreguota
+
+#### Panaikinta
+### [Changelog v0.1 Vectoriai](https://github.com/PauliusKu/2-uzduotisVEC/releases/tag/v0.1)
+#### Pridėta
+
+- Random pažymių generavimas
+- Madianos skaičiavimas
+#### Koreguota
+
+#### Panaikinta
+
