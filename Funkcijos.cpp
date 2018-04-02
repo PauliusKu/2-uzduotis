@@ -29,7 +29,7 @@ double Mediana(vector<int> &Pazymiai)
 	
 }
 //--------------------------------------------------------------------------------------------------------------------------------------
-void GeneruotiFaila(unsigned int n)
+void GeneruotiFaila(unsigned int n) //sugeneruoja n skaiciu irasu
 {
 	std::ofstream of("Failas.txt"); //irasymo pradzia
 	
@@ -38,20 +38,21 @@ void GeneruotiFaila(unsigned int n)
 	for (unsigned int i = 0; i < n; i++)
 	{
 		std::uniform_int_distribution<char> dist(97,122);
-		of << (char)(dist(mt)-32);
-		for (int i = 0; i < (int)dist(mt)-95; i++)
+		of << (char)(dist(mt)-32); //generuoja pavardes pirmaja raide
+		for (int i = 0; i < (int)dist(mt)-95; i++) //generuoja pavarde
 		{
 			of << dist(mt);
 		}
 		of << " ";
-		of << (char)(dist(mt)-32);
-		for (int i = 0; i < (int)dist(mt)-95; i++)
-			{
+		
+		of << (char)(dist(mt)-32); //generauoja vardo pirmaja raide
+		for (int i = 0; i < (int)dist(mt)-95; i++) //generuoja varda
+		{
 			of << dist(mt);
 		}
 		of << " ";
 		std::uniform_int_distribution<int> distint(1, 10);
-		for (int i = 0; i < (int)dist(mt)-95; i++)
+		for (int i = 0; i < (int)dist(mt)-95; i++) //generuoja pazymius
 		{
 			of << distint(mt) << " ";
 		}	
@@ -62,4 +63,27 @@ void GeneruotiFaila(unsigned int n)
 //----------------------------------------------------------------------------------------
 bool customCompare(Mokiniai &stud1, Mokiniai &stud2){
     return stud1.pavarde < stud2.pavarde;
+}
+//----------------------------------------------------------------------------------------
+int ivestiSk( int a, int b)
+{
+	int c{};
+	string sk{};
+	getline(cin, sk);
+	if (sk == "")
+	{
+		throw "Nieko neivedete";
+	}
+	for (int i = 0; i < sk.size(); i++)
+	{
+		if((int)sk[i] < 48 || (int)sk[i] > 57)
+		{
+			throw "Jusu ivesti simboliai neatitinka reikalavimu";
+		}
+	}
+	c = std::stoi(sk);
+	if (c >= a && c <= b)
+	{
+		return c;
+	} else throw "Jusu ivestas skaicius yra per didelis arba per mazas";
 }
