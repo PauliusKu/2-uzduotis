@@ -6,6 +6,7 @@
   4. Sugeneruoti norimo dydžio (1-10^7) mokinių 'txt' failą. Mokinio vardo ir pavardės ilgis bei pažymių kiekis: 3-21 simboliai.
   5. Naudojant 2 skirtingas strategijas testuoti vector deque ir list tipo konteinerius ir pateikti ataskaitą.
 ## Programos naudojimas
+![alt text](https://github.com/PauliusKu/2-uzduotisVEC/blob/master/Pav/Menu.png)
 ### Meniu pasirinkimai:
     1: random generavimas -> vardas -> pavardė -> kiek norite sugeneruoti -> egzamino įvertinimas ->...
     2: ivestis per konsole -> vardas -> pavardė -> mokinio įverinimai (1-10) -> 0 (pažymių įvesties pabaiga) -> egzamino įvertinimas ->...
